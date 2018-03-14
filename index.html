@@ -7,8 +7,13 @@
 <body>
 	<div id="app">
 		<input type="text" v-on:input="changeTitle">
+		<p v-once>{{ test }}</p>
 		<p>{{ title }}</p>
-	</div>
+		<p>{{ callData() }}</p>
+		<p><a target="blank" v-bind:href="link">Google Translate</a></p>
+		<hr>
+		<p v-html="linkTest"></p>
+	</div>	
 </body>
 <script src="js/vue.js"></script>
 <script src="js/index.js"></script>
