@@ -10,41 +10,23 @@
 		<div class="container">
 			<div class="row" style="margin: 100px 0px 100px 0px;">
 				<div class="col-md-6">
-					<p v-once>{{ test }}</p>
-					<input type="text" v-on:input="changeTitle">
-					<p>{{ title }}</p>
-					<p>{{ callData() }}</p>
-					<p><a target="blank" v-bind:href="link">Google Translate</a></p>
-					<hr>
-					<p v-html="linkTest"></p>
-					<hr>
-					<button v-on:click="increase(2, $event)">Click</button>
-					<button v-on:click="counter++">Click</button>
-					<p>{{ counter * 2 }}</p>
-					<p>{{ counter * 2 > 10 ? 'Greater than 10' : 'Smaller than 10' }}</p>
-					<hr>
-					<p v-on:mousemove="updateCoordinates">
-					Coordinate: {{ x }} / {{ y }}
-					- <span v-on:mousemove.stop="">Stop</span>
-					</p>
-					<hr>
-					<input type="text" v-on:keyup.enter.space="alertMe">
-					<hr>
-					<input type="text" v-model="name">
-					<p>{{ name }}</p>
-					<hr>
-					<button v-on:click="increased">Increase</button>
-					<button v-on:click="decreasei">Decrease</button>
-					<p>Counter: {{ counter }}</p>
-					<p>Result: {{ result }}</p>
-					<hr>
-					<button v-on:click="counter++">Increase</button>
-					<button v-on:click="counter--">Decrease</button>
-					<p>Counter: {{ counter }}</p>
-					<p>Result: {{ results() }}</p>
+					<ul>
+						<li v-for="(food, i) in foods" :key="food">{{ food }} ({{ i }})</li>
+					</ul>
+					<button @click="foods.push('Sweet')">Add</button>
+					<template v-for="(food, index) in foods">
+						<h4>{{ food }}</h4>
+						<p>{{ index }}</p>
+					</template>
 				</div>
 				<div class="col-md-6">
-					
+					<ul>
+						<li v-for="person in persons">
+							<p>
+								<span v-for="(value, key, index) in person">{{ key }}:- {{ value }} ({{ index }}) </span>
+							</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -52,54 +34,15 @@
 </body>
 <script src="js/vue.js"></script>
 <!-- <script src="js/index.js"></script> -->
-<script>
+<script> 
 	new Vue({
 	  el: '#app',
 	  data: {
-	    title: 'I want to learn vuejs with expertness',
-	    test: 'I want to learn vuejs with expertness',
-	    link: 'https://translate.google.com.bd/?hl=en',
-	    linkTest: '<a target="blank" href="https://google.com">Google</a>',
-	    counter: 0,
-	    result: '',
-	    x: 0,
-	    y: 0,
-	    name: 'Rana'
-	  },
-	  computed: {
-	  	output: function() {
-
-	  	}
-	  },
-	  methods: {
-	  	changeTitle: function (event) {
-	  		this.title = event.target.value;
-	  	}, 
-	  	callData: function () {
-	  		this.test = 'Hello!';
-	  		return this.test;
-	  	},
-	    increase: function (step, event) {
-	      this.counter +=step;
-	    },
-	    updateCoordinates: function (event) {
-	      this.x = event.clientX;
-	      this.y = event.clientY;
-	    },
-	    alertMe: function () {
-	      alert('Please input value');
-	    },
-	    increased: function () {
-	      this.counter++;
-	      this.result = this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
-	    },
-	    decreasei: function () {
-	      this.counter--;
-	      this.result = this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
-	    },
-	    results: function(){
-	      return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
-	    }
+	  	foods: ['rice', 'meat', 'vegetable', 'fish', 'chiken'],  
+	  	persons: [
+	  		{ name: 'Likhon', age: '25', color: 'white'},
+	  		{ name: 'Maria', age: '20', color: 'red-white'}
+	  	]   	
 	  }
 	});
 </script>

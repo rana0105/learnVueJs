@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Learn VueJs</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css/foundation.min.css"> -->
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<div id="app">
+		<div class="container" style="margin-top: 100px;">
+			<section class="row">
+				<div class="col-md-6 columns">
+					<h2 class="text-center">You</h2>
+					<div class="healthbar">
+						<div class="healthbar text-center"
+						 style="background: green; margin: 0; color: #ffffff;"
+						 :style="{width: playerHealth + '%'}">
+							{{ playerHealth }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 columns">
+					<h2 class="text-center">Monoster</h2>
+					<div class="healthbar">
+						<div class="healthbar text-center" 
+						style="background-color: green; margin: 0; color: #ffffff;" 
+						:style="{width: monstarHealth + '%'}">
+							{{ monstarHealth }}
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="row controls" v-if="!gameIsRunning">
+				<div class="col-12 columns">
+					<button id="strat-game" @click="startGame">Start New Game</button>
+				</div>
+			</section>
+			<section class="row controls" v-else>
+				<div class="col-md-12 columns">
+					<button id="attack" @click="attack">Attack</button>
+					<button id="special-attack" @click="specialAttack">Special Attack</button>
+					<button id="heal" @click="heal">Heal</button>
+					<button id="give-up" @click="giveUp">Give Up</button>
+				</div>
+			</section>
+			<section class="row log" v-if="turns.length>0">
+				<div class="col-md-12 columns">
+					<ul>
+						<li v-for="turn in turns"
+							:class="{'player-turn' : turn.isPlayer, 'monster-turn' : !turn.isPlayer}">
+							{{ turn.text }}
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>	
+</body>
+<script src="js/vue.js"></script>
+<script src="js/app.js"></script>
+<script> 
+	
+</script>
+</html>
